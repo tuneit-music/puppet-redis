@@ -113,7 +113,7 @@ dir /var/lib/redis/<%= @redis_port %>
 #
 # slaveof <masterip> <masterport>
 <% if @redis_is_slave %>
-bind <%= @redis_slaveof_master_ip %> <%= @redis_slaveof_master_port %>
+slaveof <%= @redis_slaveof_master_ip %> <%= @redis_slaveof_master_port %>
 <% end %>
 
 # If the master is password protected (using the requirepass configuration
