@@ -24,6 +24,10 @@
 #   Address to bind to.
 #   Default: false, which binds to all interfaces
 #
+# [*redis_max_memory*]
+#   Maximum memory to be addressed by instance
+#   Default: 4gb
+#
 # [*redis_max_clients*]
 #   Set the redis config value maxclients. If no value provided, it is
 #   not included in the configuration for 2.6+ and set to 0 (unlimited)
@@ -53,7 +57,7 @@
 #   Default: 1024
 #
 # [*redis_password*]
-#   Password used by AUTH command. Will be setted is its not nil.
+#   Password used by AUTH command. Will be set if its not nil.
 #   Default: nil
 #
 # [*redis_is_slave*]
