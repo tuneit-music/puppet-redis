@@ -12,6 +12,10 @@
 #   Address to bind to.
 #   Default: false, which binds to all interfaces
 #
+# [*redis_max_memory*]
+#   Maximum memory to be addressed by instance
+#   Default: 4gb
+#
 # [*redis_max_clients*]
 #   Set the redis config value maxclients. If no value provided, it is
 #   not included in the configuration for 2.6+ and set to 0 (unlimited)
@@ -41,8 +45,20 @@
 #   Default: 1024
 #
 # [*redis_password*]
-#   Password used by AUTH command. Will be setted is its not nil.
+#   Password used by AUTH command. Will be set if its not nil.
 #   Default: nil
+#
+# [*redis_is_slave*]
+#   Specify whether instance is a slave.
+#   Default: false
+#
+# [*redis_slaveof_master_ip*]
+#   IP address of master instance that this slave replicates.
+#   Default: localhost
+#
+# [*redis_slaveof_master_port*]
+#   Port that master instance is listening on.
+#   Default: 6379
 #
 # === Examples
 #
@@ -69,7 +85,10 @@ define redis::instance (
   $redis_databases = $redis::params::redis_databases,
   $redis_slowlog_log_slower_than = $redis::params::redis_slowlog_log_slower_than,
   $redis_slowlog_max_len = $redis::params::redis_slowlog_max_len,
-  $redis_password = $redis::params::redis_password
+  $redis_password = $redis::params::redis_password,
+  $redis_is_slave = $redis::params::redis_is_slave,
+  $redis_slaveof_master_ip = $redis::params::redis_slaveof_master_ip,
+  $redis_slaveof_master_port = $redis::params::redis_slaveof_master_port
   ) {
 
   # Using Exec as a dependency here to avoid dependency cyclying when doing
