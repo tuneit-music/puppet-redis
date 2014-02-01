@@ -3,11 +3,14 @@
 
 REDIS_PORT="<%= @redis_port %>"
 REDIS_BIND_ADDRESS="<%= @redis_bind_address ? @redis_bind_address : '127.0.0.1' %>"
+UID=redis
+GID=redis
 
-EXEC=<%= scope.lookupvar('redis::redis_bin_dir') %>/bin/redis-server
+DAEMON=/usr/bin/redis-server
 CLIEXEC="<%= scope.lookupvar('redis::redis_bin_dir') %>/bin/redis-cli -h $REDIS_BIND_ADDRESS -p $REDIS_PORT <%= @redis_password ? '-a ' + @redis_password : '' %>"
 PIDFILE="/var/run/redis_${REDIS_PORT}.pid"
 CONF="/etc/redis/${REDIS_PORT}.conf"
+EXEC="start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON --chuid $UID:$GID -- $CONF"
 
 ###############
 
@@ -32,7 +35,7 @@ start()
         echo "$PIDFILE exists, process is already running or crashed"
     else
         echo "Starting Redis server..."
-        $EXEC $CONF
+        $EXEC
     fi
 }
 
