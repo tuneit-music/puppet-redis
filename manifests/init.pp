@@ -146,6 +146,10 @@ class redis (
     ensure => directory,
     path   => '/var/lib/redis',
   }
+  file { 'redis-pid':
+    ensure => directory,
+    path   => '/var/run/redis',
+  }
   file { 'redis-log-dir':
     ensure => directory,
     path   => '/var/log/redis',
