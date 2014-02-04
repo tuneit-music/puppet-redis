@@ -133,8 +133,8 @@ class redis (
  }
 
   File {
-    owner => root,
-    group => root,
+    owner => redis,
+    group => redis,
   }
   file { $redis_src_dir:
     ensure => directory,
@@ -145,6 +145,14 @@ class redis (
   file { 'redis-lib':
     ensure => directory,
     path   => '/var/lib/redis',
+  }
+  file { 'redis-pid':
+    ensure => directory,
+    path   => '/var/run/redis',
+  }
+  file { 'redis-log-dir':
+    ensure => directory,
+    path   => '/var/log/redis',
   }
 
   exec { 'get-redis-pkg':
