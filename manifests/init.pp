@@ -106,7 +106,8 @@ class redis (
   $redis_password = $redis::params::redis_password,
   $redis_is_slave = $redis::params::redis_is_slave,
   $redis_slaveof_master_ip = $redis::params::redis_slaveof_master_ip,
-  $redis_slaveof_master_port = $redis::params::redis_slaveof_master_port
+  $redis_slaveof_master_port = $redis::params::redis_slaveof_master_port,
+  $redis_slave_priority = $redis::params::redis_slave_priority
 ) inherits redis::params {
 
   include wget
