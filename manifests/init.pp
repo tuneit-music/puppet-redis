@@ -72,6 +72,13 @@
 #   Port that master instance is listening on.
 #   Default: 6379
 #
+# [*redis_slave_priority*]
+#   Used by Redis Sentinel to select a slave to promote to master.
+#   A slave with a low priority number is considered better for promotion.
+#   However a special priority of 0 marks the slave as not able to perform
+#   the role of master.
+#   Default: 100
+#
 # === Examples
 #
 # include redis
@@ -106,7 +113,8 @@ class redis (
   $redis_password = $redis::params::redis_password,
   $redis_is_slave = $redis::params::redis_is_slave,
   $redis_slaveof_master_ip = $redis::params::redis_slaveof_master_ip,
-  $redis_slaveof_master_port = $redis::params::redis_slaveof_master_port
+  $redis_slaveof_master_port = $redis::params::redis_slaveof_master_port,
+  $redis_slave_priority = $redis::params::redis_slave_priority
 ) inherits redis::params {
 
   include wget
@@ -130,6 +138,7 @@ class redis (
      redis_is_slave                => $redis_is_slave,
      redis_slaveof_master_ip       => $redis_slaveof_master_ip,
      redis_slaveof_master_port     => $redis_slaveof_master_port,
+     redis_slave_priority          => $redis_slave_priority,
  }
 
   File {
