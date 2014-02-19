@@ -141,9 +141,20 @@ class redis (
      redis_slave_priority          => $redis_slave_priority,
  }
 
+  group { 'redis':
+    ensure => present,
+  }
+
+  user { 'redis':
+    ensure => present,
+    groups => ["redis"],
+    require => Group["redis"],
+  }
+
   File {
     owner => redis,
     group => redis,
+    require => User["redis"],
   }
   file { $redis_src_dir:
     ensure => directory,
