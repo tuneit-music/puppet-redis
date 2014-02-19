@@ -124,7 +124,7 @@ class redis (
   $redis_pkg = "${redis_src_dir}/${redis_pkg_name}"
 
   # Install default instance
-  redis::instance { 'redis-default': 
+  redis::instance { 'redis-default':
      redis_port                    => $redis_port,
      redis_bind_address            => $redis_bind_address,
      redis_max_memory              => $redis_max_memory,
@@ -147,7 +147,7 @@ class redis (
 
   user { 'redis':
     ensure => present,
-    groups => ["redis"],
+    gid => "redis",
     require => Group["redis"],
   }
 
