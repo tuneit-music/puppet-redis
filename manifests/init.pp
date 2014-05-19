@@ -147,7 +147,7 @@ class redis (
      redis_slaveof_master_ip       => $redis_slaveof_master_ip,
      redis_slaveof_master_port     => $redis_slaveof_master_port,
      redis_slave_priority          => $redis_slave_priority,
-     redis_masterauth_password     => $redis::params::redis_masterauth_password,
+     redis_masterauth_password     => $redis_masterauth_password,
  }
 
   group { 'redis':
