@@ -79,6 +79,13 @@
 #   the role of master.
 #   Default: 100
 #
+# [*redis_masterauth_password*]
+#
+#   If the master is password protected (using the "requirepass" configuration
+#   directive below) it is possible to tell the slave to authenticate before
+#   starting the replication synchronization process, otherwise the master will
+#   refuse the slave request.
+#
 # === Examples
 #
 # include redis
@@ -114,7 +121,8 @@ class redis (
   $redis_is_slave = $redis::params::redis_is_slave,
   $redis_slaveof_master_ip = $redis::params::redis_slaveof_master_ip,
   $redis_slaveof_master_port = $redis::params::redis_slaveof_master_port,
-  $redis_slave_priority = $redis::params::redis_slave_priority
+  $redis_slave_priority = $redis::params::redis_slave_priority,
+  $redis_masterauth_password = $redis::params::redis_masterauth_password
 ) inherits redis::params {
 
   include wget
@@ -139,6 +147,7 @@ class redis (
      redis_slaveof_master_ip       => $redis_slaveof_master_ip,
      redis_slaveof_master_port     => $redis_slaveof_master_port,
      redis_slave_priority          => $redis_slave_priority,
+     redis_masterauth_password     => $redis::params::redis_masterauth_password,
  }
 
   group { 'redis':

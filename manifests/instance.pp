@@ -67,6 +67,13 @@
 #   the role of master.
 #   Default: 100
 #
+# [*redis_masterauth_password*]
+#
+#   If the master is password protected (using the "requirepass" configuration
+#   directive below) it is possible to tell the slave to authenticate before
+#   starting the replication synchronization process, otherwise the master will
+#   refuse the slave request.
+#
 # === Examples
 #
 # redis::instance { 'redis-6900':
@@ -96,7 +103,8 @@ define redis::instance (
   $redis_is_slave = $redis::params::redis_is_slave,
   $redis_slaveof_master_ip = $redis::params::redis_slaveof_master_ip,
   $redis_slaveof_master_port = $redis::params::redis_slaveof_master_port,
-  $redis_slave_priority = $redis::params::redis_slave_priority
+  $redis_slave_priority = $redis::params::redis_slave_priority,
+  $redis_masterauth_password = $redis::params::redis_masterauth_password
   ) {
 
   # Using Exec as a dependency here to avoid dependency cyclying when doing
